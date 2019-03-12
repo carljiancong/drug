@@ -15,4 +15,6 @@ public interface DrugMonRepository extends MongoRepository<Drug,Integer> {
     public List<Drug> findByIngredientLike(String keyword);
 
     public List<Drug> findByTradeNameLike(String keyword);
+
+    public Drug findByDrugId(Integer drugId);
 }

@@ -16,7 +16,7 @@ public class DrugFavouriteGroupDrug {
     @Id
     @org.springframework.data.annotation.Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer drugFavouriteGroupDrugId;
+    private Integer drugFavGrpDrugId;
     @Column(name = "drug_favourite_group_id")
     private Integer drugFavouriteGroupId;
     @Column(name = "drug_id")
@@ -27,19 +27,19 @@ public class DrugFavouriteGroupDrug {
     public DrugFavouriteGroupDrug() {
     }
 
-    public DrugFavouriteGroupDrug(Integer drugFavouriteGroupDrugId, Integer drugFavouriteGroupId, Integer drugId, String regimenLine) {
-        this.drugFavouriteGroupDrugId = drugFavouriteGroupDrugId;
+    public DrugFavouriteGroupDrug(Integer drugFavGrpDrugId, Integer drugFavouriteGroupId, Integer drugId, String regimenLine) {
+        this.drugFavGrpDrugId = drugFavGrpDrugId;
         this.drugFavouriteGroupId = drugFavouriteGroupId;
         this.drugId = drugId;
         this.regimenLine = regimenLine;
     }
 
-    public Integer getDrugFavouriteGroupDrugId() {
-        return drugFavouriteGroupDrugId;
+    public Integer getDrugFavGrpDrugId() {
+        return drugFavGrpDrugId;
     }
 
-    public void setDrugFavouriteGroupDrugId(Integer drugFavouriteGroupDrugId) {
-        this.drugFavouriteGroupDrugId = drugFavouriteGroupDrugId;
+    public void setDrugFavGrpDrugId(Integer drugFavGrpDrugId) {
+        this.drugFavGrpDrugId = drugFavGrpDrugId;
     }
 
     public Integer getDrugFavouriteGroupId() {

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author qidong
  * @date 2019/2/15
  */
-public class Result implements Serializable {
+public class CimsResponseWrapper implements Serializable {
     private static final long serialVersionUID = 1L;
     private Object errorMessage;
     private Boolean success;
@@ -20,14 +20,15 @@ public class Result implements Serializable {
         this.errorMessage = errorMessage;
     }
 
-    public Result(CodeMsg errorMessage, Boolean success) {
-        this.errorMessage = errorMessage.getMsg();
-        this.success = success;
-    }
 
-    public Result(Boolean success, Object data) {
+    public CimsResponseWrapper(Boolean success, Object data) {
         this.success = success;
         this.data = data;
+    }
+    public CimsResponseWrapper(Boolean success, Object data, Object errorMessage) {
+        this.success = success;
+        this.data = data;
+        this.errorMessage = errorMessage;
     }
 
     public Boolean getSuccess() {
@@ -46,20 +47,15 @@ public class Result implements Serializable {
         this.data = data;
     }
 
-    public Result() {}
+    public CimsResponseWrapper() {}
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
 
-
-    public static Result buildError(CodeMsg errorData){
-        return new Result(errorData,false);
-    }
-
-    public static Result buildSuccess(Object data){
-        return new Result(true, data);
+    public static CimsResponseWrapper buildSuccess(Object data){
+        return new CimsResponseWrapper(true, data);
     }
 
 

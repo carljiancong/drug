@@ -1,6 +1,7 @@
 package com.harmonycloud.controller;
 
-import com.harmonycloud.result.Result;
+import com.harmonycloud.result.CimsResponseWrapper;
+import com.harmonycloud.service.DrugFavouriteGroupService;
 import com.harmonycloud.service.DrugService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -22,14 +23,20 @@ public class DrugController {
     @Autowired
     DrugService drugService;
 
+    @Autowired
+    DrugFavouriteGroupService drugFavouriteGroupService;
+
     @ApiOperation(value = "get drug list", httpMethod = "GET")
     @ApiImplicitParam(name = "keyword", value = "keyword", paramType = "query", dataType = "String")
     @GetMapping("/drugList")
-    public Result searchByKeyword(@RequestParam("keyword") String keyword) {
+    public CimsResponseWrapper searchByKeyword(@RequestParam("keyword") String keyword) throws Exception{
         return drugService.getDrugList(keyword);
     }
 
-    public Result getDepFavList() {
-        return null;
+    @ApiOperation(value = "get department favourite drug list", httpMethod = "GET")
+    @ApiImplicitParam(name = "clinicId", value = "clinicId", paramType = "query", dataType = "Integer")
+    @GetMapping("/depFavList")
+    public CimsResponseWrapper getDepFavList(Integer clinicId) throws Exception{
+        return drugFavouriteGroupService.getDepFavList(clinicId);
     }
 }

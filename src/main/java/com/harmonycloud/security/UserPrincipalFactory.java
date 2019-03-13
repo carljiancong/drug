@@ -1,8 +1,9 @@
 package com.harmonycloud.security;
 
-import com.harmonycloud.bo.UserPrincipal;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import com.harmonycloud.bo.UserPrincipal;
 
 import java.util.ArrayList;
 import java.util.List;

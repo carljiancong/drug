@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class ExceptionHandler {
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(value = Exception.class)
+    @org.springframework.web.bind.annotation.ExceptionHandler(value = Throwable.class)
     @ResponseBody
-    public CimsResponseWrapper handler(Exception e) {
+    public CimsResponseWrapper handler(Throwable e) {
         e.printStackTrace();
         return new CimsResponseWrapper(false, null, e.getMessage());
 
     }
+
 }

@@ -37,7 +37,7 @@ public class DrugFavouriteGroupDrugService {
             DrugFavouriteGroupDrugDto drugFavouriteGroupDrugDto = new DrugFavouriteGroupDrugDto();
 
             drugFavouriteGroupDrugDto.setDrugFavGrpDrugId(dfgd.getDrugFavGrpDrugId());
-            drugFavouriteGroupDrugDto.setDrugId(drug.getId());
+            drugFavouriteGroupDrugDto.setDrugId(drug.getDrugId());
             drugFavouriteGroupDrugDto.setIngredient(drug.getIngredient());
             drugFavouriteGroupDrugDto.setTradeName(drug.getTradeName());
             drugFavouriteGroupDrugDto.setRegimenLine(dfgd.getRegimenLine());

@@ -20,21 +20,24 @@ public class Drug {
     private String ingredient;
     @Column(name = "trade_name")
     private String tradeName;
+    @Column(name = "regimen_line")
+    private String regimenLine;
 
     public Drug() {
     }
 
-    public Drug(Integer drugId, String ingredient, String tradeName) {
+    public Drug(Integer drugId, String ingredient, String tradeName, String regimenLine) {
         this.drugId = drugId;
         this.ingredient = ingredient;
         this.tradeName = tradeName;
+        this.regimenLine = regimenLine;
     }
 
-    public Integer getId() {
+    public Integer getDrugId() {
         return drugId;
     }
 
-    public void setId(Integer drugId) {
+    public void setDrugId(Integer drugId) {
         this.drugId = drugId;
     }
 
@@ -52,5 +55,13 @@ public class Drug {
 
     public void setTradeName(String tradeName) {
         this.tradeName = tradeName;
+    }
+
+    public String getRegimenLine() {
+        return regimenLine;
+    }
+
+    public void setRegimenLine(String regimenLine) {
+        this.regimenLine = regimenLine;
     }
 }

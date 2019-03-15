@@ -108,7 +108,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>drug</finalName>
+        <finalName>ROOT</finalName>
     </build>
 
 </project>

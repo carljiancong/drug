@@ -10,16 +10,17 @@
     </parent>
     <groupId>com.harmonycloud</groupId>
     <artifactId>drug</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <!--<version>0.0.1-SNAPSHOT</version>-->
     <name>drug</name>
     <description>Demo project for Spring Boot</description>
 
-    <repositories>
-        <repository>
-            <id>thirdparty</id>
-            <url>http://10.10.102.101:8081/nexus/content/repositories/thirdparty/</url>
-        </repository>
-    </repositories>
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>thirdparty</id>-->
+            <!--<url>http://10.10.102.101:8081/nexus/content/repositories/thirdparty/</url>-->
+        <!--</repository>-->
+    <!--</repositories>-->
+    <packaging>war</packaging>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -28,6 +29,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -95,6 +108,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>drug</finalName>
     </build>
 
 </project>

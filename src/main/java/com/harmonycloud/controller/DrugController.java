@@ -1,5 +1,6 @@
 package com.harmonycloud.controller;
 
+import com.harmonycloud.entity.Drug;
 import com.harmonycloud.result.CimsResponseWrapper;
 import com.harmonycloud.service.DrugFavouriteGroupService;
 import com.harmonycloud.service.DrugService;
@@ -38,5 +39,14 @@ public class DrugController {
     @GetMapping("/depFavList")
     public CimsResponseWrapper getDepFavList(Integer clinicId) throws Exception{
         return drugFavouriteGroupService.getDepFavList(clinicId);
+    }
+
+
+    @ApiOperation(value = "get drug by id", httpMethod = "GET")
+    @ApiImplicitParam(name = "drugId", value = "drugId", paramType = "query", dataType = "Integer")
+    @GetMapping("/drug")
+    public CimsResponseWrapper getDrug(Integer drugId) throws Exception{
+        Drug drug = drugService.getDrug(drugId);
+        return CimsResponseWrapper.buildSuccess(drug);
     }
 }

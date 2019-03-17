@@ -1,5 +1,6 @@
 package com.harmonycloud.service;
 
+import com.harmonycloud.dto.DrugIntegerList;
 import com.harmonycloud.entity.Drug;
 import com.harmonycloud.monRepository.DrugMonRepository;
 import com.harmonycloud.result.CimsResponseWrapper;
@@ -7,6 +8,7 @@ import com.harmonycloud.result.ErrorMsgConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,5 +54,25 @@ public class DrugService {
             throw new Exception(ErrorMsgConstant.QUERY_DATA_ERROR);
         }
         return drug;
+    }
+
+    /**
+     * 根据 integer list 查询 drug list
+     * @param drugIntegerList
+     * @return
+     * @throws Exception
+     */
+    public List<Drug> getDrugListByIntegerList(DrugIntegerList drugIntegerList) throws Exception{
+        List<Drug> drugList = new ArrayList<>();
+        try{
+            for (Integer i: drugIntegerList.getIntegerList()) {
+                Drug drug = drugMonRepository.findByDrugId(i);
+                drugList.add(drug);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+            throw new Exception(ErrorMsgConstant.QUERY_DATA_ERROR);
+        }
+        return drugList;
     }
 }

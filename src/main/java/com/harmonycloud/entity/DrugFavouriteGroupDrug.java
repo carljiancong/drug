@@ -15,7 +15,6 @@ public class DrugFavouriteGroupDrug {
 
     @Id
     @org.springframework.data.annotation.Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer drugFavGrpDrugId;
     @Column(name = "drug_favourite_group_id")
     private Integer drugFavouriteGroupId;

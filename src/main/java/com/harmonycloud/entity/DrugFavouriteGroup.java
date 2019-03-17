@@ -14,7 +14,6 @@ import javax.persistence.*;
 public class DrugFavouriteGroup {
     @Id
     @org.springframework.data.annotation.Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer drugFavouriteGroupId;
     @Column(name = "group_name")
     private String groupName;

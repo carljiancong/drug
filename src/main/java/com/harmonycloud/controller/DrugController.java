@@ -1,5 +1,6 @@
 package com.harmonycloud.controller;
 
+import com.harmonycloud.dto.DrugIntegerList;
 import com.harmonycloud.entity.Drug;
 import com.harmonycloud.result.CimsResponseWrapper;
 import com.harmonycloud.service.DrugFavouriteGroupService;
@@ -8,9 +9,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author qidong
@@ -42,11 +43,11 @@ public class DrugController {
     }
 
 
-    @ApiOperation(value = "get drug by id", httpMethod = "GET")
-    @ApiImplicitParam(name = "drugId", value = "drugId", paramType = "query", dataType = "Integer")
-    @GetMapping("/drug")
-    public CimsResponseWrapper getDrug(Integer drugId) throws Exception{
-        Drug drug = drugService.getDrug(drugId);
-        return CimsResponseWrapper.buildSuccess(drug);
+    @ApiOperation(value = "get drugList by id list", httpMethod = "POST")
+    @ApiImplicitParam(name = "drugIntegerList", value = "drugIntegerList", dataType = "DrugIntegerList")
+    @PostMapping("/drug")
+    public CimsResponseWrapper getDrug(@RequestBody DrugIntegerList drugIntegerList) throws Exception{
+        List<Drug> drugList = drugService.getDrugListByIntegerList(drugIntegerList);
+        return CimsResponseWrapper.buildSuccess(drugList);
     }
 }

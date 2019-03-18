@@ -15,17 +15,17 @@ public class CimsResponseWrapper<E> {
     private String errorMessage;
 
     @ApiModelProperty(notes = "only return when success=true")
-    private E returnObject;
+    private E data;
 
     public CimsResponseWrapper() {
         super();
     }
 
-    public CimsResponseWrapper(boolean success, String errorMessage, E returnObject) {
+    public CimsResponseWrapper(boolean success, String errorMessage, E data) {
         super();
         this.success = success;
         this.errorMessage = errorMessage;
-        this.returnObject = returnObject;
+        this.data = data;
     }
 
 
@@ -45,12 +45,12 @@ public class CimsResponseWrapper<E> {
         this.errorMessage = errorMessage;
     }
 
-    public E getReturnObject() {
-        return returnObject;
+    public E getdata() {
+        return data;
     }
 
-    public void setReturnObject(E returnObject) {
-        this.returnObject = returnObject;
+    public void setdata(E data) {
+        this.data = data;
     }
 
 

@@ -8,6 +8,7 @@ import com.harmonycloud.service.DrugService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,11 +44,9 @@ public class DrugController {
     }
 
 
-    @ApiOperation(value = "get drugList by id list", httpMethod = "POST")
-    @ApiImplicitParam(name = "drugIntegerList", value = "drugIntegerList", dataType = "DrugIntegerList")
     @PostMapping("/drug")
-    public CimsResponseWrapper getDrug(@RequestBody DrugIntegerList drugIntegerList) throws Exception{
-        List<Drug> drugList = drugService.getDrugListByIntegerList(drugIntegerList);
+    public CimsResponseWrapper getDrug(@RequestBody Integer[] drugIdList) throws Exception{
+        List<Drug> drugList = drugService.getDrugListByIntegerList(drugIdList);
         return CimsResponseWrapper.buildSuccess(drugList);
     }
 }

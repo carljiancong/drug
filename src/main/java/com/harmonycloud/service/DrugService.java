@@ -23,10 +23,11 @@ public class DrugService {
 
     /**
      * 根据关键字，在inredient 和 tradename搜索相应的药品
+     *
      * @param keyword
      * @return
      */
-    public CimsResponseWrapper getDrugList(String keyword) throws Exception{
+    public CimsResponseWrapper getDrugList(String keyword) throws Exception {
         List<Drug> drugList = null;
         if (keyword != null) {
             try {
@@ -42,14 +43,15 @@ public class DrugService {
 
     /**
      * 根据drugid搜索药品
+     *
      * @param drugId
      * @return
      */
-    public Drug getDrug(Integer drugId) throws Exception{
+    public Drug getDrug(Integer drugId) throws Exception {
         Drug drug = null;
         try {
             drug = drugMonRepository.findByDrugId(drugId);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new Exception(ErrorMsgConstant.QUERY_DATA_ERROR);
         }
@@ -58,18 +60,24 @@ public class DrugService {
 
     /**
      * 根据 integer list 查询 drug list
-     * @param drugIntegerList
+     *
+     * @param drugIdList
      * @return
      * @throws Exception
      */
-    public List<Drug> getDrugListByIntegerList(DrugIntegerList drugIntegerList) throws Exception{
+    public List<Drug> getDrugListByIntegerList(Integer[] drugIdList) throws Exception {
         List<Drug> drugList = new ArrayList<>();
-        try{
-            for (Integer i: drugIntegerList.getIntegerList()) {
-                Drug drug = drugMonRepository.findByDrugId(i);
+        try {
+//            for (Integer i: drugIntegerList.getIntegerList()) {
+//                Drug drug = drugMonRepository.findByDrugId(i);
+//                drugList.add(drug);
+//            }
+            for (int i = 0; i < drugIdList.length; i++) {
+                Drug drug = drugMonRepository.findByDrugId(drugIdList[i]);
                 drugList.add(drug);
             }
-        } catch(Exception e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
             throw new Exception(ErrorMsgConstant.QUERY_DATA_ERROR);
         }

@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author qidong
@@ -66,22 +68,19 @@ public class DrugService {
      * @return
      * @throws Exception
      */
-    public List<Drug> getDrugListByIntegerList(Integer[] drugIdList) throws Exception {
-        List<Drug> drugList = new ArrayList<>();
+    public Map<Integer, Object> getDrugListByIntegerList(Integer[] drugIdList) throws Exception {
+
+        Map<Integer, Object> drugMap = new HashMap<>();
         try {
-//            for (Integer i: drugIntegerList.getIntegerList()) {
-//                Drug drug = drugMonRepository.findByDrugId(i);
-//                drugList.add(drug);
-//            }
             for (int i = 0; i < drugIdList.length; i++) {
                 Drug drug = drugMonRepository.findByDrugId(drugIdList[i]);
-                drugList.add(drug);
+                drugMap.put(drug.getDrugId(), drug);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             throw new DrugException(ErrorMsgEnum.QUERY_DATA_ERROR.getMessage());
         }
-        return drugList;
+        return drugMap;
     }
 }

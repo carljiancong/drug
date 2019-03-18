@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author qidong
@@ -32,21 +33,22 @@ public class DrugController {
     @ApiOperation(value = "get drug list", httpMethod = "GET")
     @ApiImplicitParam(name = "keyword", value = "keyword", paramType = "query", dataType = "String")
     @GetMapping("/drugList")
-    public CimsResponseWrapper<List> searchByKeyword(@RequestParam("keyword") String keyword) throws Exception{
+    public CimsResponseWrapper<List> searchByKeyword(@RequestParam("keyword") String keyword) throws Exception {
         return drugService.getDrugList(keyword);
     }
 
     @ApiOperation(value = "get department favourite drug list", httpMethod = "GET")
     @ApiImplicitParam(name = "clinicId", value = "clinicId", paramType = "query", dataType = "Integer")
     @GetMapping("/depFavList")
-    public CimsResponseWrapper<List> getDepFavList(Integer clinicId) throws Exception{
+    public CimsResponseWrapper<List> getDepFavList(Integer clinicId) throws Exception {
         return drugFavouriteGroupService.getDepFavList(clinicId);
     }
 
 
     @PostMapping("/drug")
-    public CimsResponseWrapper<List> getDrug(@RequestBody Integer[] drugIdList) throws Exception{
-        List<Drug> drugList = drugService.getDrugListByIntegerList(drugIdList);
-        return new CimsResponseWrapper<List>(true, null, drugList);
+    public CimsResponseWrapper<Map> getDrug(@RequestBody Integer[] drugIdList) throws Exception {
+
+        Map<Integer, Object> drugMap = drugService.getDrugListByIntegerList(drugIdList);
+        return new CimsResponseWrapper<Map>(true, null, drugMap);
     }
 }

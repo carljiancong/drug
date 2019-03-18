@@ -45,6 +45,8 @@ public class DrugController {
     }
 
 
+    @ApiOperation(value = "get drug list", httpMethod = "GET")
+    @ApiImplicitParam(name = "drugIdList", value = "drugIdList", paramType = "query", dataType = "Integer")
     @PostMapping("/drug")
     public CimsResponseWrapper<Map> getDrug(@RequestBody Integer[] drugIdList) throws Exception {
 

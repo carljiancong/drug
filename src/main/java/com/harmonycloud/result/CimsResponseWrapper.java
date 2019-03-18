@@ -1,61 +1,56 @@
 package com.harmonycloud.result;
 
-import java.io.Serializable;
+import io.swagger.annotations.ApiModelProperty;
+
 
 /**
  * @author qidong
  * @date 2019/2/15
  */
-public class CimsResponseWrapper implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private Object errorMessage;
-    private Boolean success;
-    private Object data;
+public class CimsResponseWrapper<E> {
+    @ApiModelProperty(required = true)
+    private boolean success;
 
-    public Object getErrorMessage() {
-        return errorMessage;
+    @ApiModelProperty(notes = "only return when success=false")
+    private String errorMessage;
+
+    @ApiModelProperty(notes = "only return when success=true")
+    private E returnObject;
+
+    public CimsResponseWrapper() {
+        super();
     }
 
-    public void setErrorMessage(Object errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-
-    public CimsResponseWrapper(Boolean success, Object data) {
+    public CimsResponseWrapper(boolean success, String errorMessage, E returnObject) {
+        super();
         this.success = success;
-        this.data = data;
-    }
-    public CimsResponseWrapper(Boolean success, Object data, Object errorMessage) {
-        this.success = success;
-        this.data = data;
         this.errorMessage = errorMessage;
+        this.returnObject = returnObject;
     }
 
-    public Boolean getSuccess() {
+
+    public boolean isSuccess() {
         return success;
     }
 
-    public void setSuccess(Boolean success) {
+    public void setSuccess(boolean success) {
         this.success = success;
     }
 
-    public Object getData() {
-        return data;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
-    public CimsResponseWrapper() {}
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public E getReturnObject() {
+        return returnObject;
     }
 
-
-    public static CimsResponseWrapper buildSuccess(Object data){
-        return new CimsResponseWrapper(true, data);
+    public void setReturnObject(E returnObject) {
+        this.returnObject = returnObject;
     }
 
 

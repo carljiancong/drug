@@ -15,12 +15,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan("com.harmonycloud")
 @EnableMongoRepositories("com.harmonycloud.monRepository")
 @EntityScan("com.harmonycloud.entity")
-public class DrugApplication extends SpringBootServletInitializer {
+public class DrugApplication /*extends SpringBootServletInitializer*/ {
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(this.getClass());
-    }
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//        return builder.sources(this.getClass());
+//    }
     public static void main(String[] args) {
         SpringApplication.run(DrugApplication.class, args);
     }

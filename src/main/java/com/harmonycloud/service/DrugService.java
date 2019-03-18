@@ -2,9 +2,10 @@ package com.harmonycloud.service;
 
 import com.harmonycloud.dto.DrugIntegerList;
 import com.harmonycloud.entity.Drug;
+import com.harmonycloud.enums.ErrorMsgEnum;
+import com.harmonycloud.exception.DrugException;
 import com.harmonycloud.monRepository.DrugMonRepository;
 import com.harmonycloud.result.CimsResponseWrapper;
-import com.harmonycloud.result.ErrorMsgConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ public class DrugService {
      * @param keyword
      * @return
      */
-    public CimsResponseWrapper getDrugList(String keyword) throws Exception {
+    public CimsResponseWrapper<List> getDrugList(String keyword) throws Exception {
         List<Drug> drugList = null;
         if (keyword != null) {
             try {
@@ -35,10 +36,10 @@ public class DrugService {
                 drugList.addAll(drugMonRepository.findByTradeNameLike(keyword));
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new Exception(ErrorMsgConstant.QUERY_DATA_ERROR);
+                throw new DrugException(ErrorMsgEnum.QUERY_DATA_ERROR.getMessage());
             }
         }
-        return CimsResponseWrapper.buildSuccess(drugList);
+        return new CimsResponseWrapper<List>(true, null, drugList);
     }
 
     /**
@@ -53,7 +54,7 @@ public class DrugService {
             drug = drugMonRepository.findByDrugId(drugId);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception(ErrorMsgConstant.QUERY_DATA_ERROR);
+            throw new DrugException(ErrorMsgEnum.QUERY_DATA_ERROR.getMessage());
         }
         return drug;
     }
@@ -79,7 +80,7 @@ public class DrugService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception(ErrorMsgConstant.QUERY_DATA_ERROR);
+            throw new DrugException(ErrorMsgEnum.QUERY_DATA_ERROR.getMessage());
         }
         return drugList;
     }

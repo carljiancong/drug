@@ -3,8 +3,9 @@ package com.harmonycloud.service;
 import com.harmonycloud.dto.DrugFavouriteGroupDrugDto;
 import com.harmonycloud.dto.DrugFavouriteGroupDto;
 import com.harmonycloud.entity.DrugFavouriteGroup;
+import com.harmonycloud.enums.ErrorMsgEnum;
+import com.harmonycloud.exception.DrugException;
 import com.harmonycloud.monRepository.DrugFavouriteGroupMonRepository;
-import com.harmonycloud.result.ErrorMsgConstant;
 import com.harmonycloud.result.CimsResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class DrugFavouriteGroupService {
      * @param clinicId
      * @return
      */
-    public CimsResponseWrapper getDepFavList(Integer clinicId) throws Exception{
+    public CimsResponseWrapper<List> getDepFavList(Integer clinicId) throws Exception{
         List<DrugFavouriteGroupDto> drugFavouriteGroupDtoList = new ArrayList<>();
         List<DrugFavouriteGroup> drugFavouriteGroupList = null;
 
@@ -39,7 +40,7 @@ public class DrugFavouriteGroupService {
             drugFavouriteGroupList = drugFavouriteGroupMonRepository.findByClinicId(clinicId);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception(ErrorMsgConstant.QUERY_DATA_ERROR);
+            throw new DrugException(ErrorMsgEnum.QUERY_DATA_ERROR.getMessage());
         }
 
         //根据部门的id搜索常用的药
@@ -54,6 +55,6 @@ public class DrugFavouriteGroupService {
             drugFavouriteGroupDtoList.add(drugFavouriteGroupDto);
         }
 
-        return CimsResponseWrapper.buildSuccess(drugFavouriteGroupDtoList);
+        return new CimsResponseWrapper<List>(true, null, drugFavouriteGroupDtoList);
     }
 }

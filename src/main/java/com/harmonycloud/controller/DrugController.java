@@ -32,21 +32,21 @@ public class DrugController {
     @ApiOperation(value = "get drug list", httpMethod = "GET")
     @ApiImplicitParam(name = "keyword", value = "keyword", paramType = "query", dataType = "String")
     @GetMapping("/drugList")
-    public CimsResponseWrapper searchByKeyword(@RequestParam("keyword") String keyword) throws Exception{
+    public CimsResponseWrapper<List> searchByKeyword(@RequestParam("keyword") String keyword) throws Exception{
         return drugService.getDrugList(keyword);
     }
 
     @ApiOperation(value = "get department favourite drug list", httpMethod = "GET")
     @ApiImplicitParam(name = "clinicId", value = "clinicId", paramType = "query", dataType = "Integer")
     @GetMapping("/depFavList")
-    public CimsResponseWrapper getDepFavList(Integer clinicId) throws Exception{
+    public CimsResponseWrapper<List> getDepFavList(Integer clinicId) throws Exception{
         return drugFavouriteGroupService.getDepFavList(clinicId);
     }
 
 
     @PostMapping("/drug")
-    public CimsResponseWrapper getDrug(@RequestBody Integer[] drugIdList) throws Exception{
+    public CimsResponseWrapper<List> getDrug(@RequestBody Integer[] drugIdList) throws Exception{
         List<Drug> drugList = drugService.getDrugListByIntegerList(drugIdList);
-        return CimsResponseWrapper.buildSuccess(drugList);
+        return new CimsResponseWrapper<List>(true, null, drugList);
     }
 }

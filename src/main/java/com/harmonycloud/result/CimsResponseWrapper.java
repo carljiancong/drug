@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 
 /**
- * @author qidong
  * @date 2019/2/15
  */
 public class CimsResponseWrapper<E> {

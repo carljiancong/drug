@@ -11,10 +11,10 @@ import java.util.List;
  * @date 2019/3/4
  */
 @RepositoryRestResource
-public interface DrugMonRepository extends MongoRepository<Drug,Integer> {
-    public List<Drug> findByIngredientLike(String keyword);
+public interface DrugMonRepository extends MongoRepository<Drug, Integer> {
+    List<Drug> findByIngredientLike(String keyword);
 
-    public List<Drug> findByTradeNameLike(String keyword);
+    List<Drug> findByTradeNameLike(String keyword);
 
-    public Drug findByDrugId(Integer drugId);
+    Drug findByDrugId(Integer drugId);
 }

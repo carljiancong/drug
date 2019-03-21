@@ -14,6 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @ComponentScan("com.harmonycloud")
 @EnableMongoRepositories("com.harmonycloud.monRepository")
+@EnableJpaRepositories("com.harmonycloud.oraRepository")
 @EntityScan("com.harmonycloud.entity")
 public class DrugApplication extends SpringBootServletInitializer {
 

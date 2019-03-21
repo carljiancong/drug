@@ -3,49 +3,54 @@ package com.harmonycloud.service;
 import com.harmonycloud.dto.DrugFavouriteGroupDrugDto;
 import com.harmonycloud.dto.DrugFavouriteGroupDto;
 import com.harmonycloud.entity.DrugFavouriteGroup;
-import com.harmonycloud.enums.ErrorMsgEnum;
-import com.harmonycloud.exception.DrugException;
 import com.harmonycloud.monRepository.DrugFavouriteGroupMonRepository;
-import com.harmonycloud.result.CimsResponseWrapper;
+import com.harmonycloud.oraRepository.DrugFavouriteGroupOraRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author qidong
- * @date 2019/3/10
- */
+
 @Service
 public class DrugFavouriteGroupService {
 
-    @Autowired
-    DrugFavouriteGroupMonRepository drugFavouriteGroupMonRepository;
+    private static final Logger logger = LoggerFactory.getLogger(DrugFavouriteGroupService.class);
 
     @Autowired
-    DrugFavouriteGroupDrugService drugFavouriteGroupDrugService;
+    private DrugFavouriteGroupMonRepository drugFavouriteGroupMonRepository;
+
+    @Autowired
+    private DrugFavouriteGroupDrugService drugFavouriteGroupDrugService;
+
+    @Autowired
+    private DrugFavouriteGroupOraRepository drugFavouriteGroupOraRepository;
 
     /**
-     * 根据clinicId，搜索部门，在根据部门的id搜索常用的药
+     * get department favoute drug by clinic id
      * @param clinicId
      * @return
+     * @throws Exception
      */
-    public CimsResponseWrapper<List> getDepFavList(Integer clinicId) throws Exception{
+    public List<DrugFavouriteGroupDto> getDepFavList(Integer clinicId) throws Exception {
         List<DrugFavouriteGroupDto> drugFavouriteGroupDtoList = new ArrayList<>();
         List<DrugFavouriteGroup> drugFavouriteGroupList = null;
 
         //搜索部门
-        try {
-            drugFavouriteGroupList = drugFavouriteGroupMonRepository.findByClinicId(clinicId);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new DrugException(ErrorMsgEnum.QUERY_DATA_ERROR.getMessage());
+        drugFavouriteGroupList = drugFavouriteGroupMonRepository.findByClinicId(clinicId);
+
+        //oracle search
+        if (drugFavouriteGroupList == null || drugFavouriteGroupList.size() == 0) {
+            drugFavouriteGroupList = drugFavouriteGroupOraRepository.findByClinicId(clinicId);
         }
+
 
         //根据部门的id搜索常用的药
         for (DrugFavouriteGroup dfg : drugFavouriteGroupList) {
             List<DrugFavouriteGroupDrugDto> dgfdDtoList = drugFavouriteGroupDrugService.getDrugFavGroupDrug(dfg.getDrugFavouriteGroupId());
+
             DrugFavouriteGroupDto drugFavouriteGroupDto = new DrugFavouriteGroupDto();
 
             drugFavouriteGroupDto.setDrugFavouriteGroupId(dfg.getDrugFavouriteGroupId());
@@ -55,6 +60,6 @@ public class DrugFavouriteGroupService {
             drugFavouriteGroupDtoList.add(drugFavouriteGroupDto);
         }
 
-        return new CimsResponseWrapper<List>(true, null, drugFavouriteGroupDtoList);
+        return drugFavouriteGroupDtoList;
     }
 }

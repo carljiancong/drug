@@ -3,7 +3,6 @@ package com.harmonycloud.dto;
 import java.util.List;
 
 /**
- * @author qidong
  * @date 2019/3/17
  */
 public class DrugIntegerList {

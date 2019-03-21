@@ -1,7 +1,6 @@
 package com.harmonycloud.dto;
 
 /**
- * @author qidong
  * @date 2019/3/10
  */
 public class DrugFavouriteGroupDrugDto {

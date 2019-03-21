@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author qidong
  * @date 2019/3/10
  */
 public class DrugFavouriteGroupDto implements Serializable {

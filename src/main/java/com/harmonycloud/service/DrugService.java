@@ -91,7 +91,11 @@ public class DrugService {
         return drugMap;
     }
 
-    //
+    /**
+     * get drug list by integer list
+     * @param IntegerList
+     * @return
+     */
     public Map<Integer, Drug> getDrugByInteger(List<Integer> IntegerList) {
         Map<Integer, Drug> drugMap = new HashMap<>();
         Iterable<Drug> drugs = drugMonRepository.findAllById(IntegerList);

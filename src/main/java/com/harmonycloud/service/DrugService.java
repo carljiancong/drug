@@ -99,7 +99,7 @@ public class DrugService {
     public Map<Integer, Drug> getDrugByInteger(List<Integer> IntegerList) {
         Map<Integer, Drug> drugMap = new HashMap<>();
         Iterable<Drug> drugs = drugMonRepository.findAllById(IntegerList);
-        if (drugs == null) {
+        if (drugs == null||!drugs.iterator().hasNext()) {
             drugs = drugOraRepository.findAllById(IntegerList);
         }
         drugs.forEach(drug -> {
